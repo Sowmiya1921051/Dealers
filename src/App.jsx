@@ -27,21 +27,25 @@ const BrokerDetails = () => {
   }, [brokerDetails.dealerType]);
 
   // Fetch dealer IDs from the API
-  const fetchDealerIds = async () => {
-    try {
-      const response = await axios.get("http://localhost/broker/addBroker.php");
-      if (response.data.status === "success") {
-        setDealerIds(response.data.data); // Assuming the response contains dealer IDs in the "data" property
-      } else {
-        setMessage("Failed to load dealer IDs.");
-        setMessageType("error");
-      }
-    } catch (error) {
-      console.error("Error fetching dealer IDs:", error);
+const fetchDealerIds = async () => {
+  try {
+    const response = await axios.get("http://localhost/broker/addBroker.php");
+    if (response.data.status === "success") {
+      // Filter to include only dealers (not sub-dealers)
+      const filteredDealers = response.data.data.filter(
+        (dealer) => dealer.dealerType === "Dealer"
+      );
+      setDealerIds(filteredDealers); // Update state with filtered dealers
+    } else {
       setMessage("Failed to load dealer IDs.");
       setMessageType("error");
     }
-  };
+  } catch (error) {
+    console.error("Error fetching dealer IDs:", error);
+    setMessage("Failed to load dealer IDs.");
+    setMessageType("error");
+  }
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -160,30 +164,30 @@ const BrokerDetails = () => {
             </select>
           </div>
 
-          {/* If dealer type is "Sub Dealer", show dealerId */}
           {brokerDetails.dealerType === "Sub Dealer" && (
-            <div className="input-container">
-              <select
-                name="dealerId"
-                value={brokerDetails.dealerId}
-                onChange={handleChange}
-                className="animated-input"
-                placeholder="Select Dealer ID"
-                required
-              >
-                <option value="" disabled>Select Dealer ID</option>
-                {dealerIds.length > 0 ? (
-                  dealerIds.map((dealer) => (
-                    <option key={dealer.id} value={dealer.id}>
-                      {dealer.name} ({dealer.id})
-                    </option>
-                  ))
-                ) : (
-                  <option value="" disabled>No dealers found</option>
-                )}
-              </select>
-            </div>
-          )}
+  <div className="input-container">
+    <select
+      name="dealerId"
+      value={brokerDetails.dealerId}
+      onChange={handleChange}
+      className="animated-input"
+      placeholder="Select Dealer ID"
+      required
+    >
+      <option value="" disabled>Select Dealer ID</option>
+      {dealerIds.length > 0 ? (
+        dealerIds.map((dealer) => (
+          <option key={dealer.id} value={dealer.id}>
+          {dealer.name} - ( {dealer.id} )
+          </option>
+        ))
+      ) : (
+        <option value="" disabled>No dealers found</option>
+      )}
+    </select>
+  </div>
+)}
+
 
           {/* District */}
           <div className="input-container">
@@ -210,6 +214,17 @@ const BrokerDetails = () => {
               required
             ></textarea>
           </div>
+
+        {/* Message Display */}
+    {message && (
+      <div
+        className={`message ${
+          messageType === "success" ? "success-message" : "error-message"
+        }`}
+      >
+        {message}
+      </div>
+    )}
 
           {/* Submit Button */}
           <button type="submit" className="animated-btn">
