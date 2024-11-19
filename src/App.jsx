@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const BrokerDetails = () => {
@@ -10,10 +10,38 @@ const BrokerDetails = () => {
     dealerType: "", // Initial empty value
     district: "",
     address: "",
+    dealerId: "", // Added dealerId to state
   });
 
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
+  const [dealerIds, setDealerIds] = useState([]); // State to hold dealer IDs when "Sub Dealer" is selected
+
+  // Fetch dealer IDs when the component mounts or when the dealerType changes
+  useEffect(() => {
+    if (brokerDetails.dealerType === "Sub Dealer") {
+      fetchDealerIds();
+    } else {
+      setDealerIds([]); // Clear dealer IDs when dealerType is not "Sub Dealer"
+    }
+  }, [brokerDetails.dealerType]);
+
+  // Fetch dealer IDs from the API
+  const fetchDealerIds = async () => {
+    try {
+      const response = await axios.get("http://localhost/broker/addBroker.php");
+      if (response.data.status === "success") {
+        setDealerIds(response.data.data); // Assuming the response contains dealer IDs in the "data" property
+      } else {
+        setMessage("Failed to load dealer IDs.");
+        setMessageType("error");
+      }
+    } catch (error) {
+      console.error("Error fetching dealer IDs:", error);
+      setMessage("Failed to load dealer IDs.");
+      setMessageType("error");
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,24 +50,24 @@ const BrokerDetails = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Check for empty fields
     if (!brokerDetails.name || !brokerDetails.email || !brokerDetails.phone || !brokerDetails.dealerType) {
       setMessage("All fields are required.");
       setMessageType("error");
       return;
     }
-  
+
     try {
       const response = await axios.post(
         "http://localhost/broker/addBroker.php",
         brokerDetails,
         { headers: { "Content-Type": "application/json" } }
       );
-  
+
       setMessage(response.data.message);
       setMessageType(response.data.status === "success" ? "success" : "error");
-  
+
       if (response.data.status === "success") {
         setBrokerDetails({
           name: "",
@@ -49,6 +77,7 @@ const BrokerDetails = () => {
           dealerType: "",
           district: "",
           address: "",
+          dealerId: "", // Reset dealer ID when the form is reset
         });
       }
     } catch (error) {
@@ -57,12 +86,12 @@ const BrokerDetails = () => {
       console.error(error);
     }
   };
-  
 
   return (
     <div className="animated-container">
       <div className="animated-card">
         <h2 className="animated-title">Broker Details</h2>
+
         <form onSubmit={handleSubmit} className="animated-form">
           {/* Name */}
           <div className="input-container">
@@ -125,15 +154,37 @@ const BrokerDetails = () => {
               placeholder="Select Dealer Type"
               required
             >
-                <option value="" disabled>
-                  Select Dealer Type
-                </option>
+              <option value="" disabled>Select Dealer Type</option>
               <option value="Dealer">Dealer</option>
               <option value="Sub Dealer">Sub Dealer</option>
             </select>
           </div>
 
-           
+          {/* If dealer type is "Sub Dealer", show dealerId */}
+          {brokerDetails.dealerType === "Sub Dealer" && (
+            <div className="input-container">
+              <select
+                name="dealerId"
+                value={brokerDetails.dealerId}
+                onChange={handleChange}
+                className="animated-input"
+                placeholder="Select Dealer ID"
+                required
+              >
+                <option value="" disabled>Select Dealer ID</option>
+                {dealerIds.length > 0 ? (
+                  dealerIds.map((dealer) => (
+                    <option key={dealer.id} value={dealer.id}>
+                      {dealer.name} ({dealer.id})
+                    </option>
+                  ))
+                ) : (
+                  <option value="" disabled>No dealers found</option>
+                )}
+              </select>
+            </div>
+          )}
+
           {/* District */}
           <div className="input-container">
             <input
@@ -165,13 +216,6 @@ const BrokerDetails = () => {
             Submit
           </button>
         </form>
-
-        {/* Success/Error Message */}
-        {message && (
-          <div className={`message ${messageType}`}>
-            {message}
-          </div>
-        )}
       </div>
     </div>
   );
