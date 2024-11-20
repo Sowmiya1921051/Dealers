@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaUserAlt, FaCog, FaInfoCircle } from 'react-icons/fa'; // Import different icons
+import { FaHome, FaUserAlt, FaCog, FaInfoCircle,FaTachometerAlt} from 'react-icons/fa'; // Import different icons
 
 const SideNav = () => {
   return (
@@ -8,7 +8,7 @@ const SideNav = () => {
       <ul className="sidenav-list">
         <li>
           <Link to="/" className="sidenav-link">
-            <FaHome className="sidenav-icon" /> Home
+            <FaTachometerAlt className="sidenav-icon" /> Broker Dashboard
           </Link>
         </li>
         <li>
@@ -16,8 +16,8 @@ const SideNav = () => {
             <FaUserAlt className="sidenav-icon" /> Add Broker
           </Link>
         </li>
-        <li>
-          <Link to="/broker-details" className="sidenav-link"> {/* Updated the link */}
+        {/* <li>
+          <Link to="/broker-details" className="sidenav-link"> 
             <FaCog className="sidenav-icon" /> Broker Details
           </Link>
         </li>
@@ -30,7 +30,7 @@ const SideNav = () => {
           <Link to="/about" className="sidenav-link">
             <FaInfoCircle className="sidenav-icon" /> About
           </Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   );

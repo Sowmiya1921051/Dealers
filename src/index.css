@@ -263,3 +263,58 @@
     font-size: 18px; /* Smaller icons on mobile */
   }
 }
+
+
+/* Table design */
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+
+/* Button.css */
+
+.add-broker-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #FAB12F; /* Tomato color */
+  color: white;
+  border: 2px solid #FAB12F;
+  border-radius: 30px; /* Rounded corners */
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.add-broker-button:hover {
+  background-color: #fff;
+  color: #FAB12F;
+  border: 2px solid #FAB12F;
+  transform: scale(1.1); /* Button grows on hover */
+}
+
+.add-broker-button:active {
+  transform: scale(1); /* Reset scale when clicked */
+}
+
