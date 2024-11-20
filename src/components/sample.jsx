@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   const [brokers, setBrokers] = useState([]);
-  const [selectedBroker, setSelectedBroker] = useState(null);
+  const [expandedDealer, setExpandedDealer] = useState(null);
 
   useEffect(() => {
     fetch('http://localhost/broker/addBroker.php')
@@ -16,13 +16,13 @@ function Home() {
       .catch((error) => console.error('Error fetching broker data:', error));
   }, []);
 
-  const handleRowClick = (broker) => {
-    setSelectedBroker(broker);
+  const toggleExpandDealer = (dealerId) => {
+    setExpandedDealer((prev) => (prev === dealerId ? null : dealerId));
   };
 
-  const handleCloseDetails = () => {
-    setSelectedBroker(null);
-  };
+  // Separate dealers and sub-dealers
+  const dealers = brokers.filter((broker) => broker.dealerType === 'Dealer');
+  const subDealers = brokers.filter((broker) => broker.dealerType === 'Sub Dealer');
 
   return (
     <div style={{ position: 'relative', padding: '20px' }}>
@@ -31,6 +31,9 @@ function Home() {
       </Link>
 
       <h1>Broker List</h1>
+
+      {/* Dealers Table */}
+      <h2>Dealers</h2>
       <table style={{ width: '100%', borderCollapse: 'collapse' }} border="1">
         <thead>
           <tr>
@@ -43,75 +46,82 @@ function Home() {
             <th>District</th>
             <th>Address</th>
             <th>Created At</th>
-            <th>Parent Dealer</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {brokers.map((broker) => (
-            <tr
-              key={broker.id}
-              onClick={() => handleRowClick(broker)}
-              style={{ cursor: 'pointer', backgroundColor: '#f9f9f9' }}
-            >
-              <td>{broker.id}</td>
-              <td>{broker.name}</td>
-              <td>{broker.email}</td>
-              <td>{broker.phone}</td>
-              <td>{broker.company}</td>
-              <td>{broker.dealerType}</td>
-              <td>{broker.district}</td>
-              <td>{broker.address}</td>
-              <td>{broker.created_at}</td>
-              <td>{broker.parent_dealer || 'N/A'}</td>
-            </tr>
+          {dealers.map((dealer) => (
+            <React.Fragment key={dealer.id}>
+              <tr
+                style={{
+                  cursor: 'pointer',
+                  backgroundColor: expandedDealer === dealer.id ? '#e6f7ff' : '#f9f9f9',
+                }}
+                onClick={() => toggleExpandDealer(dealer.id)}
+              >
+                <td>{dealer.id}</td>
+                <td>{dealer.name}</td>
+                <td>{dealer.email}</td>
+                <td>{dealer.phone}</td>
+                <td>{dealer.company}</td>
+                <td>{dealer.dealerType}</td>
+                <td>{dealer.district}</td>
+                <td>{dealer.address}</td>
+                <td>{dealer.created_at}</td>
+                <td>
+                  {expandedDealer === dealer.id ? 'Hide Sub-Dealers' : 'View Sub-Dealers'}
+                </td>
+              </tr>
+              {expandedDealer === dealer.id && (
+                <tr>
+                  <td colSpan="10">
+                    <table
+                      style={{
+                        width: '100%',
+                        borderCollapse: 'collapse',
+                        backgroundColor: '#f1f1f1',
+                        marginTop: '10px',
+                      }}
+                      border="1"
+                    >
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Phone</th>
+                          <th>Company</th>
+                          <th>Dealer Type</th>
+                          <th>District</th>
+                          <th>Address</th>
+                          <th>Created At</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {subDealers
+                          .filter((subDealer) => subDealer.parent_dealer === dealer.id)
+                          .map((subDealer) => (
+                            <tr key={subDealer.id}>
+                              <td>{subDealer.id}</td>
+                              <td>{subDealer.name}</td>
+                              <td>{subDealer.email}</td>
+                              <td>{subDealer.phone}</td>
+                              <td>{subDealer.company}</td>
+                              <td>{subDealer.dealerType}</td>
+                              <td>{subDealer.district}</td>
+                              <td>{subDealer.address}</td>
+                              <td>{subDealer.created_at}</td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              )}
+            </React.Fragment>
           ))}
         </tbody>
       </table>
-
-      {/* Display the selected broker details */}
-      {selectedBroker && (
-        <div
-          className="broker-details"
-          style={{
-            position: 'fixed',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '50%',
-            backgroundColor: 'white',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-            padding: '20px',
-            borderRadius: '8px',
-            zIndex: '1000',
-          }}
-        >
-          <h2 style={{ marginBottom: '10px' }}>Broker Details</h2>
-          <p><strong>ID:</strong> {selectedBroker.id}</p>
-          <p><strong>Name:</strong> {selectedBroker.name}</p>
-          <p><strong>Email:</strong> {selectedBroker.email}</p>
-          <p><strong>Phone:</strong> {selectedBroker.phone}</p>
-          <p><strong>Company:</strong> {selectedBroker.company}</p>
-          <p><strong>Dealer Type:</strong> {selectedBroker.dealerType}</p>
-          <p><strong>District:</strong> {selectedBroker.district}</p>
-          <p><strong>Address:</strong> {selectedBroker.address}</p>
-          <p><strong>Created At:</strong> {selectedBroker.created_at}</p>
-          <p><strong>Parent Dealer:</strong> {selectedBroker.parent_dealer || 'N/A'}</p>
-          <button
-            onClick={handleCloseDetails}
-            style={{
-              marginTop: '20px',
-              padding: '10px 20px',
-              backgroundColor: '#f44336',
-              color: 'white',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}
-          >
-            Close
-          </button>
-        </div>
-      )}
     </div>
   );
 }

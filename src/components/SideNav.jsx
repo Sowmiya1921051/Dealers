@@ -16,6 +16,11 @@ const SideNav = () => {
             <FaUserAlt className="sidenav-icon" /> Add Broker
           </Link>
         </li>
+        <li>
+          <Link to="/sample" className="sidenav-link">
+            <FaUserAlt className="sidenav-icon" /> sample
+          </Link>
+        </li>
         {/* <li>
           <Link to="/broker-details" className="sidenav-link"> 
             <FaCog className="sidenav-icon" /> Broker Details
