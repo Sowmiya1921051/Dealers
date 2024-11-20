@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './components/Home'
 import AddBroker from './components/addBroker'  
 import SideNav from './components/SideNav'; 
+import Sample from './components/sample'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
         <Route path="/" element={<Home />} />
           <Route path="/add-broker" element={<AddBroker />} />
+          <Route path="/sample" element={<Sample />} />
           {/* Add more routes here */}
         </Routes>
       </div>
