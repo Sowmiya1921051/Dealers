@@ -201,3 +201,65 @@
         transform: rotate(0deg);
     }
 }
+
+
+
+
+/* side Navbar*/
+
+
+
+/* Sidebar container */
+.sidenav {
+  height: 100%;
+  width: 250px; /* Width of sidebar */
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #E7CCCC; /* Sidebar background color */
+  padding-top: 20px;
+  z-index: 1000;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Sidebar list items */
+.sidenav-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Sidebar links */
+.sidenav-link {
+  display: flex;
+  align-items: center;
+  color: black; /* Light color for text */
+  text-decoration: none;
+  font-size: 18px;
+  padding: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.sidenav-link:hover {
+  background-color: #EDE8DC; /* Change background color on hover */
+  color: black; /* Change text color on hover */
+}
+
+.sidenav-icon {
+  margin-right: 15px; /* Space between icon and text */
+  font-size: 20px;
+}
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 768px) {
+  .sidenav {
+    width: 200px; /* Smaller sidebar for mobile */
+  }
+
+  .sidenav-link {
+    font-size: 16px; /* Slightly smaller font size on mobile */
+  }
+
+  .sidenav-icon {
+    font-size: 18px; /* Smaller icons on mobile */
+  }
+}
