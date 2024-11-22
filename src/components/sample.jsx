@@ -46,6 +46,7 @@ function Home() {
             <th>District</th>
             <th>Address</th>
             <th>Created At</th>
+            <th>Credits Points</th> {/* Added Credits Points column */}
             <th>Actions</th>
           </tr>
         </thead>
@@ -68,13 +69,14 @@ function Home() {
                 <td>{dealer.district}</td>
                 <td>{dealer.address}</td>
                 <td>{dealer.created_at}</td>
+                <td>{dealer.credit_points || 0}</td> {/* Displaying Credits Points */}
                 <td>
                   {expandedDealer === dealer.id ? 'Hide Sub-Dealers' : 'View Sub-Dealers'}
                 </td>
               </tr>
               {expandedDealer === dealer.id && (
                 <tr>
-                  <td colSpan="10">
+                  <td colSpan="11">
                     <table
                       style={{
                         width: '100%',
@@ -95,6 +97,7 @@ function Home() {
                           <th>District</th>
                           <th>Address</th>
                           <th>Created At</th>
+                          <th>Credits Points</th> {/* Added Credits Points column */}
                         </tr>
                       </thead>
                       <tbody>
@@ -111,6 +114,7 @@ function Home() {
                               <td>{subDealer.district}</td>
                               <td>{subDealer.address}</td>
                               <td>{subDealer.created_at}</td>
+                              <td>{subDealer.credits_points || 0}</td> {/* Displaying Credits Points */}
                             </tr>
                           ))}
                       </tbody>
