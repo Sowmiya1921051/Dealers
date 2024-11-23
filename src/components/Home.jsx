@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Home() {
   const [brokers, setBrokers] = useState([]);
-  const [selectedBroker, setSelectedBroker] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('http://localhost/broker/addBroker.php')
@@ -16,16 +16,12 @@ function Home() {
       .catch((error) => console.error('Error fetching broker data:', error));
   }, []);
 
-  const handleRowClick = (broker) => {
-    setSelectedBroker(broker);
-  };
-
-  const handleCloseDetails = () => {
-    setSelectedBroker(null);
+  const handleRowClick = (brokerId) => {
+    navigate(`/broker-details/${brokerId}`, { state: { brokerId } });
   };
 
   return (
-    <div style={{ position: 'relative', padding: '20px' }}>
+    <div style={{ padding: '20px' }}>
       <Link to="/add-broker">
         <button className="add-broker-button">Add Broker</button>
       </Link>
@@ -44,13 +40,14 @@ function Home() {
             <th>Address</th>
             <th>Created At</th>
             <th>Parent Dealer</th>
+            <th>Credit Points</th>
           </tr>
         </thead>
         <tbody>
           {brokers.map((broker) => (
             <tr
               key={broker.id}
-              onClick={() => handleRowClick(broker)}
+              onClick={() => handleRowClick(broker.id)}
               style={{ cursor: 'pointer', backgroundColor: '#f9f9f9' }}
             >
               <td>{broker.id}</td>
@@ -63,55 +60,11 @@ function Home() {
               <td>{broker.address}</td>
               <td>{broker.created_at}</td>
               <td>{broker.parent_dealer || 'N/A'}</td>
+              <td>{broker.credit_points}</td>
             </tr>
           ))}
         </tbody>
       </table>
-
-      {/* Display the selected broker details */}
-      {selectedBroker && (
-        <div
-          className="broker-details"
-          style={{
-            position: 'fixed',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '50%',
-            backgroundColor: 'white',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-            padding: '20px',
-            borderRadius: '8px',
-            zIndex: '1000',
-          }}
-        >
-          <h2 style={{ marginBottom: '10px' }}>Broker Details</h2>
-          <p><strong>ID:</strong> {selectedBroker.id}</p>
-          <p><strong>Name:</strong> {selectedBroker.name}</p>
-          <p><strong>Email:</strong> {selectedBroker.email}</p>
-          <p><strong>Phone:</strong> {selectedBroker.phone}</p>
-          <p><strong>Company:</strong> {selectedBroker.company}</p>
-          <p><strong>Dealer Type:</strong> {selectedBroker.dealerType}</p>
-          <p><strong>District:</strong> {selectedBroker.district}</p>
-          <p><strong>Address:</strong> {selectedBroker.address}</p>
-          <p><strong>Created At:</strong> {selectedBroker.created_at}</p>
-          <p><strong>Parent Dealer:</strong> {selectedBroker.parent_dealer || 'N/A'}</p>
-          <button
-            onClick={handleCloseDetails}
-            style={{
-              marginTop: '20px',
-              padding: '10px 20px',
-              backgroundColor: '#f44336',
-              color: 'white',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}
-          >
-            Close
-          </button>
-        </div>
-      )}
     </div>
   );
 }

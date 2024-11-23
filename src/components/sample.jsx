@@ -24,6 +24,16 @@ function Home() {
   const dealers = brokers.filter((broker) => broker.dealerType === 'Dealer');
   const subDealers = brokers.filter((broker) => broker.dealerType === 'Sub Dealer');
 
+  // Calculate total credit points for a dealer, including their sub-dealers
+  const getTotalCredits = (dealerId) => {
+    const dealerCredit = parseInt(dealers.find((dealer) => dealer.id === dealerId)?.credit_points || 0, 10);
+    const subDealerCredits = subDealers
+      .filter((subDealer) => subDealer.parent_dealer === dealerId)
+      .reduce((total, subDealer) => total + parseInt(subDealer.credit_points || 0, 10), 0);
+
+    return dealerCredit + subDealerCredits;
+  };
+
   return (
     <div style={{ position: 'relative', padding: '20px' }}>
       <Link to="/add-broker">
@@ -46,7 +56,8 @@ function Home() {
             <th>District</th>
             <th>Address</th>
             <th>Created At</th>
-            <th>Credits Points</th> {/* Added Credits Points column */}
+            <th>Dealer Credits</th>
+            <th>Total Credits (Including Sub-Dealers)</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -69,14 +80,15 @@ function Home() {
                 <td>{dealer.district}</td>
                 <td>{dealer.address}</td>
                 <td>{dealer.created_at}</td>
-                <td>{dealer.credit_points || 0}</td> {/* Displaying Credits Points */}
+                <td>{dealer.credit_points || 0}</td> {/* Dealer's own credits */}
+                <td>{getTotalCredits(dealer.id)}</td> {/* Total credits (dealer + sub-dealers) */}
                 <td>
                   {expandedDealer === dealer.id ? 'Hide Sub-Dealers' : 'View Sub-Dealers'}
                 </td>
               </tr>
               {expandedDealer === dealer.id && (
                 <tr>
-                  <td colSpan="11">
+                  <td colSpan="12">
                     <table
                       style={{
                         width: '100%',
@@ -97,7 +109,7 @@ function Home() {
                           <th>District</th>
                           <th>Address</th>
                           <th>Created At</th>
-                          <th>Credits Points</th> {/* Added Credits Points column */}
+                          <th>Credits Points</th> {/* Sub-dealer credits */}
                         </tr>
                       </thead>
                       <tbody>
@@ -114,7 +126,7 @@ function Home() {
                               <td>{subDealer.district}</td>
                               <td>{subDealer.address}</td>
                               <td>{subDealer.created_at}</td>
-                              <td>{subDealer.credits_points || 0}</td> {/* Displaying Credits Points */}
+                              <td>{subDealer.credit_points || 0}</td>
                             </tr>
                           ))}
                       </tbody>

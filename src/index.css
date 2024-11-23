@@ -415,3 +415,56 @@ tr:hover {
   background-color: #f8d7da;
   color: #721c24;
 }
+
+
+/*Broker details*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Dashboard */
+.dashboard {
+  padding: 20px;
+  text-align: center;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.stat-card {
+  background-color: #f3f4f6;
+  padding: 20px;
+  border-radius: 8px;
+  width: 150px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.stat-card p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+
+
+

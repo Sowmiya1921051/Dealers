@@ -6,6 +6,11 @@ const SideNav = () => {
   return (
     <div className="sidenav">
       <ul className="sidenav-list">
+      <li>
+          <Link to="/dashboard" className="sidenav-link">
+            <FaTachometerAlt className="sidenav-icon" /> Dashboard
+          </Link>
+        </li>
         <li>
           <Link to="/" className="sidenav-link">
             <FaTachometerAlt className="sidenav-icon" /> Broker Dashboard
