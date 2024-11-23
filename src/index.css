@@ -433,36 +433,102 @@ tr:hover {
 
 
 /* Dashboard */
-.dashboard {
+.dashboard-container {
+  font-family: 'Arial', sans-serif;
   padding: 20px;
-  text-align: center;
+  background-color: #f9f9f9;
 }
 
-.stats {
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.dashboard-cards {
   display: flex;
-  justify-content: center;
   gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
-.stat-card {
-  background-color: #f3f4f6;
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  border-radius: 8px;
-  width: 150px;
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  max-width: 300px;
+  transition: transform 0.2s ease;
 }
 
-.stat-card h3 {
-  margin: 0;
-  font-size: 18px;
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.dealer-card {
+  border-left: 5px solid #4caf50;
+}
+
+.sub-dealer-card {
+  border-left: 5px solid #2196f3;
+}
+
+.card h3 {
+  font-size: 1.2rem;
   color: #333;
 }
 
-.stat-card p {
-  font-size: 24px;
+.card .count {
+  font-size: 2.5rem;
+  color: #555;
+}
+
+.details-section {
+  margin-top: 20px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.details-section h3 {
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.broker-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.broker-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.broker-name {
   font-weight: bold;
-  color: #007bff;
+}
+
+.broker-type {
+  font-style: italic;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .dashboard-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    max-width: 100%;
+  }
 }
 
 

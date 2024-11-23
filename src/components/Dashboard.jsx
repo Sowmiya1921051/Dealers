@@ -6,25 +6,15 @@ const Dashboard = () => {
   const [subDealerCount, setSubDealerCount] = useState(0);
 
   useEffect(() => {
-    // Example data fetch (replace with your actual API call)
     const fetchData = async () => {
       try {
         const response = await fetch('http://localhost/broker/addBroker.php');
         const result = await response.json();
-        
-        console.log('Fetched Data:', result.data); // Log the fetched data
 
-        // Check if data is valid
         if (result.data && Array.isArray(result.data)) {
           setBrokers(result.data);
-
-          // Filter dealers and sub-dealers with trimming to avoid hidden whitespaces
-          const dealerCount = result.data.filter(broker => broker.dealerType.trim() === 'Dealer').length;
-          const subDealerCount = result.data.filter(broker => broker.dealerType.trim() === 'Sub Dealer').length;
-
-          console.log('Dealer Count:', dealerCount); // Log dealer count
-          console.log('Sub Dealer Count:', subDealerCount); // Log sub-dealer count
-
+          const dealerCount = result.data.filter(broker => broker.dealerType === 'Dealer').length;
+          const subDealerCount = result.data.filter(broker => broker.dealerType === 'Sub Dealer').length;
           setDealerCount(dealerCount);
           setSubDealerCount(subDealerCount);
         } else {
@@ -39,18 +29,31 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="dashboard">
-      <h2>Dashboard</h2>
-      <div className="stats">
-        <div className="stat-card">
+    <div className="dashboard-container">
+      <header className="dashboard-header">
+        <h2>Dashboard Overview</h2>
+      </header>
+      <div className="dashboard-cards">
+        <div className="card dealer-card">
           <h3>Dealers</h3>
-          <p>{dealerCount}</p>
+          <p className="count">{dealerCount}</p>
         </div>
-        <div className="stat-card">
+        <div className="card sub-dealer-card">
           <h3>Sub Dealers</h3>
-          <p>{subDealerCount}</p>
+          <p className="count">{subDealerCount}</p>
         </div>
       </div>
+      <section className="details-section">
+        <h3>Broker Details</h3>
+        <ul className="broker-list">
+          {brokers.map((broker, index) => (
+            <li key={index} className="broker-item">
+              <span className="broker-name">{broker.name}</span>
+              <span className="broker-type">{broker.dealerType}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 };
