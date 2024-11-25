@@ -3,6 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function Home() {
   const [brokers, setBrokers] = useState([]);
+  const [filteredBrokers, setFilteredBrokers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedDistrict, setSelectedDistrict] = useState('');
+  const [districts, setDistricts] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -11,6 +15,13 @@ function Home() {
       .then((data) => {
         if (data.status === 'success') {
           setBrokers(data.data);
+          setFilteredBrokers(data.data);
+
+          // Extract unique districts
+          const uniqueDistricts = [
+            ...new Set(data.data.map((broker) => broker.district)),
+          ].filter((district) => district); // Remove undefined/null
+          setDistricts(uniqueDistricts);
         }
       })
       .catch((error) => console.error('Error fetching broker data:', error));
@@ -20,6 +31,45 @@ function Home() {
     navigate(`/broker-details/${brokerId}`, { state: { brokerId } });
   };
 
+  const handleSearch = (event) => {
+    const value = event.target.value.toLowerCase();
+    setSearchTerm(value);
+
+    // Filter brokers by email or phone
+    const filtered = brokers.filter(
+      (broker) =>
+        broker.email.toLowerCase().includes(value) || broker.phone.includes(value)
+    );
+
+    // Apply district filter if selected
+    setFilteredBrokers(
+      selectedDistrict
+        ? filtered.filter((broker) => broker.district === selectedDistrict)
+        : filtered
+    );
+  };
+
+  const handleDistrictChange = (event) => {
+    const district = event.target.value;
+    setSelectedDistrict(district);
+
+    // Filter brokers by district
+    const filtered = brokers.filter((broker) =>
+      district ? broker.district === district : true
+    );
+
+    // Apply search filter if necessary
+    setFilteredBrokers(
+      searchTerm
+        ? filtered.filter(
+            (broker) =>
+              broker.email.toLowerCase().includes(searchTerm) ||
+              broker.phone.includes(searchTerm)
+          )
+        : filtered
+    );
+  };
+
   return (
     <div style={{ padding: '20px' }}>
       <Link to="/add-broker">
@@ -27,6 +77,44 @@ function Home() {
       </Link>
 
       <h1>Broker List</h1>
+
+      {/* District Dropdown */}
+      <select
+        value={selectedDistrict}
+        onChange={handleDistrictChange}
+        style={{
+          marginBottom: '20px',
+          padding: '10px',
+          width: '100%',
+          fontSize: '16px',
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+        }}
+      >
+        <option value="">All Districts</option>
+        {districts.map((district, index) => (
+          <option key={index} value={district}>
+            {district}
+          </option>
+        ))}
+      </select>
+
+      {/* Search Input */}
+      <input
+        type="text"
+        placeholder="Search by email or phone..."
+        value={searchTerm}
+        onChange={handleSearch}
+        style={{
+          marginBottom: '20px',
+          padding: '10px',
+          width: '100%',
+          fontSize: '16px',
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+        }}
+      />
+
       <table style={{ width: '100%', borderCollapse: 'collapse' }} border="1">
         <thead>
           <tr>
@@ -44,7 +132,7 @@ function Home() {
           </tr>
         </thead>
         <tbody>
-          {brokers.map((broker) => (
+          {filteredBrokers.map((broker) => (
             <tr
               key={broker.id}
               onClick={() => handleRowClick(broker.id)}
