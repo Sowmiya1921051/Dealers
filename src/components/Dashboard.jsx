@@ -46,7 +46,7 @@ const Dashboard = () => {
       {
         label: 'Count',
         data: [dealerCount, subDealerCount],
-        backgroundColor: ['#4CAF50', '#2196F3'], // Colors for bars
+        backgroundColor: ['#D91656', '#EB5B00'], // Colors for bars
         borderWidth: 1,
       },
     ],
@@ -65,12 +65,15 @@ const Dashboard = () => {
     },
   };
 
+  const dealers = brokers.filter(broker => broker.dealerType === 'Dealer');
+  const subDealers = brokers.filter(broker => broker.dealerType === 'Sub Dealer');
+
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-wrapper">
       <header className="dashboard-header">
         <h2>Dashboard Overview</h2>
       </header>
-      <div className="dashboard-cards">
+      <div className="dashboard-summary">
         <div className="card dealer-card">
           <h3>Dealers</h3>
           <p className="count">{dealerCount}</p>
@@ -80,19 +83,51 @@ const Dashboard = () => {
           <p className="count">{subDealerCount}</p>
         </div>
       </div>
-      <section className="chart-section">
+      <section className="chart-wrapper">
         <Bar data={chartData} options={chartOptions} />
       </section>
-      <section className="details-section">
+      <section className="broker-details">
         <h3>Broker Details</h3>
-        <ul className="broker-list">
-          {brokers.map((broker, index) => (
-            <li key={index} className="broker-item">
-              <span className="broker-name">{broker.name}</span>
-              <span className="broker-type">{broker.dealerType}</span>
-            </li>
-          ))}
-        </ul>
+        <div className="broker-tables-wrapper">
+          <div className="dealers-section">
+            <h4>Dealers</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                {dealers.map((dealer, index) => (
+                  <tr key={index}>
+                    <td>{dealer.name}</td>
+                    <td>{dealer.dealerType}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="sub-dealers-section">
+            <h4>Sub Dealers</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                {subDealers.map((subDealer, index) => (
+                  <tr key={index}>
+                    <td>{subDealer.name}</td>
+                    <td>{subDealer.dealerType}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </section>
     </div>
   );
