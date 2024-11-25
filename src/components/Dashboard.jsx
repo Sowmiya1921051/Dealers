@@ -1,4 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { Bar } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const Dashboard = () => {
   const [brokers, setBrokers] = useState([]);
@@ -28,6 +40,31 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
+  const chartData = {
+    labels: ['Dealers', 'Sub Dealers'],
+    datasets: [
+      {
+        label: 'Count',
+        data: [dealerCount, subDealerCount],
+        backgroundColor: ['#4CAF50', '#2196F3'], // Colors for bars
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Dealer and Sub Dealer Count',
+      },
+    },
+  };
+
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
@@ -43,6 +80,9 @@ const Dashboard = () => {
           <p className="count">{subDealerCount}</p>
         </div>
       </div>
+      <section className="chart-section">
+        <Bar data={chartData} options={chartOptions} />
+      </section>
       <section className="details-section">
         <h3>Broker Details</h3>
         <ul className="broker-list">
