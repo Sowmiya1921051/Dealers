@@ -6,6 +6,7 @@ import SideNav from './components/SideNav';
 import Sample from './components/sample'
 import BrokerDetails from './components/BrokerDetails';
 import Dashboard from './components/Dashboard';
+import Profile from './components/Profile'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/add-broker" element={<AddBroker />} />
             <Route path="/sample" element={<Sample />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/profile" element={<Profile />} />
             {/* Add more routes here */}
           </Routes>
         </div>

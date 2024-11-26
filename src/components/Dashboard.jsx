@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -73,6 +74,9 @@ const Dashboard = () => {
       <header className="dashboard-header">
         <h2>Dashboard Overview</h2>
       </header>
+      <div>
+        <Link to='/profile'>Profile</Link>
+      </div>
       <div className="dashboard-summary">
         <div className="card dealer-card">
           <h3>Dealers</h3>

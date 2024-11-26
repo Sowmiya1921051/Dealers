@@ -115,9 +115,9 @@ function Home() {
         }}
       />
 
-      <table style={{ width: '100%', borderCollapse: 'collapse' }} border="1">
+      <table  style={{ width: '100%', borderCollapse: 'collapse' }} border="1">
         <thead>
-          <tr>
+          <tr >
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
@@ -131,7 +131,7 @@ function Home() {
             <th>Credit Points</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           {filteredBrokers.map((broker) => (
             <tr
               key={broker.id}

@@ -770,7 +770,85 @@ table tr:hover {
 }
 
 
-/* Home */
+/* profile */
+
+
+/* Container for the entire profile section */
+.profile-container {
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+/* Heading for the profile section */
+.profile-heading {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Table styling */
+.profile-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background: #FFFFFF; /* White background for the table */
+}
+
+/* Table header styling */
+.profile-table-header {
+  background-color: #4CAF50 !important; /* Green background for header */
+  color: black; /* White text in header */
+  text-align: left;
+}
+
+/* Individual table cells styling */
+.profile-table-cell {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Styling for table rows (list values) */
+.profile-table-row {
+  background-color: #f9f9f9; /* Light grey background for rows */
+  color: #333; /* Dark text for the rows */
+}
+
+/* Table row hover effect */
+.profile-table-row:hover {
+  background-color: #D989B5; /* Slightly darker grey when hovered */
+}
+
+/* Loading and error messages */
+.profile-loading, .profile-error {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #333;
+  padding: 10px;
+}
+
+/* No data available message */
+.profile-no-data {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+  padding: 20px;
+}
+
+/* Table header styling */
+.profile-table th {
+  background-color: #863A6F; /* Green background for header */
+  color: white; /* White text in header */
+  text-align: left;
+}
+
+/* Individual table cells styling */
+.profile-table-cell {
+  padding: 10px;
+  border: 1px solid #975C8D;
+}
+
+/* Rest of your styles remain the same */
 
 
 
