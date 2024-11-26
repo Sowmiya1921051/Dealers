@@ -146,6 +146,8 @@ const Dashboard = () => {
         <Bar data={chartData} options={chartOptions} />
       </section>
 
+      
+
       <section className="broker-details">
         <h3>Broker Details</h3>
         <div className="broker-tables-wrapper">
@@ -188,6 +190,7 @@ const Dashboard = () => {
             </table>
           </div>
         </div>
+        
       </section>
 
       {/* Add the credit points chart after the broker details */}
