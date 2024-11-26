@@ -25,21 +25,21 @@ function Profile() {
       id,
       verified: newStatus
     })
-    .then(response => {
+      .then(response => {
         if (response.data.status === 'success') {
-            // Update the local state to reflect the changes
-            setProfileData(prevData =>
-                prevData.map(profile =>
-                    profile.id === id ? { ...profile, verified: newStatus } : profile
-                )
-            );
+          // Update the local state to reflect the changes
+          setProfileData(prevData =>
+            prevData.map(profile =>
+              profile.id === id ? { ...profile, verified: newStatus } : profile
+            )
+          );
         } else {
-            console.error("Error:", response.data.message);
+          console.error("Error:", response.data.message);
         }
-    })
-    .catch(error => {
+      })
+      .catch(error => {
         console.error("Error updating verification status:", error);
-    });
+      });
   };
 
   if (loading) return <div className="profile-loading">Loading...</div>;
@@ -75,7 +75,7 @@ function Profile() {
                 <td className="profile-table-cell">{profile.district}</td>
                 <td className="profile-table-cell">{profile.address}</td>
                 <td className="profile-table-cell">
-                  <button 
+                  <button
                     className={`verify-button ${profile.verified ? 'verified' : 'unverified'}`}
                     onClick={() => handleVerify(profile.id, profile.verified)}
                   >

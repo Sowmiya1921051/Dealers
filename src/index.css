@@ -1,123 +1,126 @@
 .animated-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 90vh;
-    /* padding: 20px; */
-    /* background: #f5f5f5; */
-    /* overflow: hidden;  */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  /* padding: 20px; */
+  /* background: #f5f5f5; */
+  /* overflow: hidden;  */
 }
 
 .animated-card {
-    background: #ffffff;
-    padding: 20px; /* Reduced padding to allow more content space */
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    width: 500px; /* Fixed width */
-    height: 400px; /* Fixed height */
-    animation: slideIn 0.8s ease-out;
-    position: relative;
-    /* overflow-y: auto;  */
-    overflow-x: hidden; 
+  background: #ffffff;
+  padding: 20px;
+  /* Reduced padding to allow more content space */
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 500px;
+  /* Fixed width */
+  height: 400px;
+  /* Fixed height */
+  animation: slideIn 0.8s ease-out;
+  position: relative;
+  /* overflow-y: auto;  */
+  overflow-x: hidden;
 }
 
 .animated-card::before,
 .animated-card::after {
-    content: "";
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, #1a73e8, transparent);
-    animation: rotateBackground 10s linear infinite;
-    z-index: 0;
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #1a73e8, transparent);
+  animation: rotateBackground 10s linear infinite;
+  z-index: 0;
 }
 
 .animated-card::before {
-    top: -100px;
-    left: -100px;
+  top: -100px;
+  left: -100px;
 }
 
 .animated-card::after {
-    bottom: -100px;
-    right: -100px;
-    background: radial-gradient(circle, #7c4dff, transparent);
-    animation: rotateBackgroundReverse 10s linear infinite;
+  bottom: -100px;
+  right: -100px;
+  background: radial-gradient(circle, #7c4dff, transparent);
+  animation: rotateBackgroundReverse 10s linear infinite;
 }
 
 .animated-card h2 {
-    text-align: center;
-    font-size: 26px;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: bold;
-    z-index: 1;
-    position: relative;
+  text-align: center;
+  font-size: 26px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+  z-index: 1;
+  position: relative;
 }
 
 /* Form input animations */
 .animated-input {
-    width: 90%;
-    padding: 14px;
-    font-size: 16px;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    outline: none;
-    background: #f9f9f9;
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 1;
+  width: 90%;
+  padding: 14px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  background: #f9f9f9;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .animated-input:focus {
-    border-color: #7c4dff;
-    box-shadow: 0 0 10px rgba(124, 77, 255, 0.4);
+  border-color: #7c4dff;
+  box-shadow: 0 0 10px rgba(124, 77, 255, 0.4);
 }
 
 /* Button with hover animation */
 .animated-btn {
-    width: 100%;
-    padding: 12px;
-    font-size: 18px;
-    background: linear-gradient(135deg, #1a73e8, #7c4dff);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 20px;
-    z-index: 1;
-    position: relative;
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  background: linear-gradient(135deg, #1a73e8, #7c4dff);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+  z-index: 1;
+  position: relative;
 }
 
 .animated-btn:hover {
-    background: linear-gradient(135deg, #004cbf, #521ad7);
-    transform: scale(1.05);
+  background: linear-gradient(135deg, #004cbf, #521ad7);
+  transform: scale(1.05);
 }
 
 /* Alert messages */
 .animated-message {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 14px;
-    color: #fff;
-    z-index: 1;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #fff;
+  z-index: 1;
 }
 
 .animated-message.success {
-    background: #28a745;
+  background: #28a745;
 }
 
 .animated-message.error {
-    background: #dc3545;
+  background: #dc3545;
 }
 
 /* Input container spacing */
 .input-container {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .input-container:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 
@@ -139,67 +142,71 @@
     background-color: #f8d7da;
     color: #721c24;
   } */
-  
 
-  .message {
-    margin-top: 1rem;
-    padding: 0.75rem;
-    border-radius: 4px;
-    font-size: 1rem;
-    text-align: center;
-    animation: fadeIn 0.5s ease-in-out;
+
+.message {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  .success-message {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+
+  to {
+    opacity: 1;
   }
-  
-  .error-message {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
+}
+
 
 /* Keyframe Animations */
 @keyframes slideIn {
-    0% {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes rotateBackground {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes rotateBackgroundReverse {
-    0% {
-        transform: rotate(360deg);
-    }
-    100% {
-        transform: rotate(0deg);
-    }
+  0% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 
@@ -212,11 +219,13 @@
 /* Sidebar container */
 .sidenav {
   height: 100%;
-  width: 250px; /* Width of sidebar */
+  width: 250px;
+  /* Width of sidebar */
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #E7CCCC; /* Sidebar background color */
+  background-color: #E7CCCC;
+  /* Sidebar background color */
   padding-top: 20px;
   z-index: 1000;
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
@@ -232,7 +241,8 @@
 .sidenav-link {
   display: flex;
   align-items: center;
-  color: black; /* Light color for text */
+  color: black;
+  /* Light color for text */
   text-decoration: none;
   font-size: 18px;
   padding: 15px;
@@ -240,27 +250,33 @@
 }
 
 .sidenav-link:hover {
-  background-color: #EDE8DC; /* Change background color on hover */
-  color: black; /* Change text color on hover */
+  background-color: #EDE8DC;
+  /* Change background color on hover */
+  color: black;
+  /* Change text color on hover */
 }
 
 .sidenav-icon {
-  margin-right: 15px; /* Space between icon and text */
+  margin-right: 15px;
+  /* Space between icon and text */
   font-size: 20px;
 }
 
 /* Responsive design for smaller screens */
 @media screen and (max-width: 768px) {
   .sidenav {
-    width: 200px; /* Smaller sidebar for mobile */
+    width: 200px;
+    /* Smaller sidebar for mobile */
   }
 
   .sidenav-link {
-    font-size: 16px; /* Slightly smaller font size on mobile */
+    font-size: 16px;
+    /* Slightly smaller font size on mobile */
   }
 
   .sidenav-icon {
-    font-size: 18px; /* Smaller icons on mobile */
+    font-size: 18px;
+    /* Smaller icons on mobile */
   }
 }
 
@@ -274,7 +290,8 @@ table {
   /* margin-top: 20px; */
 }
 
-th, td {
+th,
+td {
   padding: 8px;
   text-align: left;
   border: 1px solid #ddd;
@@ -297,25 +314,30 @@ tr:hover {
   right: 10px;
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #FAB12F; /* Tomato color */
+  background-color: #FAB12F;
+  /* Tomato color */
   color: white;
   border: 2px solid #FAB12F;
-  border-radius: 30px; /* Rounded corners */
+  border-radius: 30px;
+  /* Rounded corners */
   cursor: pointer;
   outline: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease; /* Smooth transition */
+  transition: all 0.3s ease;
+  /* Smooth transition */
 }
 
 .add-broker-button:hover {
   background-color: #fff;
   color: #FAB12F;
   border: 2px solid #FAB12F;
-  transform: scale(1.1); /* Button grows on hover */
+  transform: scale(1.1);
+  /* Button grows on hover */
 }
 
 .add-broker-button:active {
-  transform: scale(1); /* Reset scale when clicked */
+  transform: scale(1);
+  /* Reset scale when clicked */
 }
 
 
@@ -328,6 +350,7 @@ tr:hover {
     opacity: 0;
     transform: translate(-50%, -60%);
   }
+
   to {
     opacity: 1;
     transform: translate(-50%, -50%);
@@ -438,8 +461,10 @@ tr:hover {
 
 .details-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Two columns */
-  gap: 20px; /* Space between grid items */
+  grid-template-columns: repeat(2, 1fr);
+  /* Two columns */
+  gap: 20px;
+  /* Space between grid items */
   background: #fff;
   border-radius: 8px;
   padding: 20px;
@@ -448,7 +473,8 @@ tr:hover {
 
 .details-item {
   display: flex;
-  justify-content: space-between; /* Label left, value right */
+  justify-content: space-between;
+  /* Label left, value right */
   align-items: center;
   padding: 10px;
   border: 1px solid #D91656;
@@ -538,7 +564,8 @@ tr:hover {
 }
 
 .chart-box {
-  width: 48%;  /* Each chart will take up 48% of the width */
+  width: 48%;
+  /* Each chart will take up 48% of the width */
   text-align: center;
 }
 
@@ -723,10 +750,13 @@ tr:hover {
 .dealers-section,
 .sub-dealers-section {
   flex: 1;
-  max-width: 48%; /* Adjust to fit within the container */
-  height: 300px; /* Fixed height */
+  max-width: 48%;
+  /* Adjust to fit within the container */
+  height: 300px;
+  /* Fixed height */
   border: 1px solid #ddd;
-  overflow: auto; /* Enables scrolling if content overflows */
+  overflow: auto;
+  /* Enables scrolling if content overflows */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
 }
@@ -746,7 +776,8 @@ table td {
 table th {
   background-color: #f4f4f4;
   font-weight: bold;
-  position: sticky; /* Keeps the header fixed during scroll */
+  position: sticky;
+  /* Keeps the header fixed during scroll */
   top: 0;
   z-index: 1;
 }
@@ -763,12 +794,33 @@ table tr:hover {
 .sub-dealers-section h4 {
   margin: 0;
   padding: 10px;
-  background-color: #48CFCB; /* Change as needed */
+  background-color: #48CFCB;
+  /* Change as needed */
   color: white;
   text-align: center;
   border-bottom: 1px solid #ddd;
 }
 
+
+.verify-profile-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.verify-profile-button {
+  padding: 12px 24px;
+  background-color: #80BCBD;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.verify-profile-button:hover {
+  background-color: #D5F0C1;
+  color: black;
+}
 
 /* profile */
 
@@ -792,13 +844,16 @@ table tr:hover {
   width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
-  background: #FFFFFF; /* White background for the table */
+  background: #FFFFFF;
+  /* White background for the table */
 }
 
 /* Table header styling */
 .profile-table-header {
-  background-color: #4CAF50 !important; /* Green background for header */
-  color: black; /* White text in header */
+  background-color: #4CAF50 !important;
+  /* Green background for header */
+  color: black;
+  /* White text in header */
   text-align: left;
 }
 
@@ -810,17 +865,21 @@ table tr:hover {
 
 /* Styling for table rows (list values) */
 .profile-table-row {
-  background-color: #f9f9f9; /* Light grey background for rows */
-  color: #333; /* Dark text for the rows */
+  background-color: #f9f9f9;
+  /* Light grey background for rows */
+  color: #333;
+  /* Dark text for the rows */
 }
 
 /* Table row hover effect */
 .profile-table-row:hover {
-  background-color: #D989B5; /* Slightly darker grey when hovered */
+  background-color: #D989B5;
+  /* Slightly darker grey when hovered */
 }
 
 /* Loading and error messages */
-.profile-loading, .profile-error {
+.profile-loading,
+.profile-error {
   text-align: center;
   font-size: 1.2rem;
   color: #333;
@@ -837,8 +896,10 @@ table tr:hover {
 
 /* Table header styling */
 .profile-table th {
-  background-color: #863A6F; /* Green background for header */
-  color: white; /* White text in header */
+  background-color: #863A6F;
+  /* Green background for header */
+  color: white;
+  /* White text in header */
   text-align: left;
 }
 
@@ -849,6 +910,3 @@ table tr:hover {
 }
 
 /* Rest of your styles remain the same */
-
-
-
