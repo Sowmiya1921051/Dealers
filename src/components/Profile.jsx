@@ -145,6 +145,42 @@ function Profile() {
         <div className="profile-no-data">No profiles found</div>
       )}
 
+      {/* Display Unverified Sub-Dealer Count */}
+      <div className="unverified-subdealer-count-container">
+        <button className="button-33">
+          Unverified Sub-Dealer Profiles: {getUnverifiedSubDealerCount()}
+        </button>
+      </div>
+
+      {/* Display Unverified Sub-Dealer Details */}
+      {getUnverifiedSubDealerProfiles().length > 0 && (
+        <div className="subdealer-section">
+          <h2 className="subdealer-heading">New profiles</h2>
+          <table className="subdealer-table">
+            <thead>
+              <tr className="subdealer-table-header">
+                <th className="subdealer-table-cell">Name</th>
+                <th className="subdealer-table-cell">Email</th>
+                <th className="subdealer-table-cell">Phone</th>
+                <th className="subdealer-table-cell">Company</th>
+                <th className="subdealer-table-cell">Created At</th>
+              </tr>
+            </thead>
+            <tbody>
+              {getUnverifiedSubDealerProfiles().map((profile) => (
+                <tr key={profile.id} className="subdealer-table-row">
+                  <td className="subdealer-table-cell">{profile.name}</td>
+                  <td className="subdealer-table-cell">{profile.email}</td>
+                  <td className="subdealer-table-cell">{profile.phone}</td>
+                  <td className="subdealer-table-cell">{profile.company}</td>
+                  <td className="subdealer-table-cell">{profile.created_at}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
       {/* Display Verified Sub-Dealer Count */}
       <div className="verified-subdealer-count-container">
         <button className="button-33">
@@ -155,7 +191,7 @@ function Profile() {
       {/* Display Verified Sub-Dealer Details */}
       {getVerifiedSubDealerProfiles().length > 0 && (
         <div className="subdealer-section">
-          <h2 className="subdealer-heading">Verified Sub-Dealer Profiles</h2>
+          <h2 className="subdealer-heading">Old Profiles</h2>
           <table className="subdealer-table">
             <thead>
               <tr className="subdealer-table-header">
@@ -181,41 +217,7 @@ function Profile() {
         </div>
       )}
 
-      {/* Display Unverified Sub-Dealer Count */}
-      <div className="unverified-subdealer-count-container">
-        <button className="button-33">
-          Unverified Sub-Dealer Profiles: {getUnverifiedSubDealerCount()}
-        </button>
-      </div>
-
-      {/* Display Unverified Sub-Dealer Details */}
-      {getUnverifiedSubDealerProfiles().length > 0 && (
-        <div className="subdealer-section">
-          <h2 className="subdealer-heading">Unverified Sub-Dealer Profiles</h2>
-          <table className="subdealer-table">
-            <thead>
-              <tr className="subdealer-table-header">
-                <th className="subdealer-table-cell">Name</th>
-                <th className="subdealer-table-cell">Email</th>
-                <th className="subdealer-table-cell">Phone</th>
-                <th className="subdealer-table-cell">Company</th>
-                <th className="subdealer-table-cell">Created At</th>
-              </tr>
-            </thead>
-            <tbody>
-              {getUnverifiedSubDealerProfiles().map((profile) => (
-                <tr key={profile.id} className="subdealer-table-row">
-                  <td className="subdealer-table-cell">{profile.name}</td>
-                  <td className="subdealer-table-cell">{profile.email}</td>
-                  <td className="subdealer-table-cell">{profile.phone}</td>
-                  <td className="subdealer-table-cell">{profile.company}</td>
-                  <td className="subdealer-table-cell">{profile.created_at}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      
     </div>
   );
 }
