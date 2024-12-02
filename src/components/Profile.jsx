@@ -7,8 +7,9 @@ function Profile() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost/broker/addBroker.php')
-      .then(response => {
+    axios
+      .get('http://localhost/broker/addBroker.php')
+      .then((response) => {
         setProfileData(response.data.data);
         setLoading(false);
       })
@@ -21,25 +22,30 @@ function Profile() {
   const handleVerify = (id, currentStatus) => {
     const newStatus = !currentStatus; // Toggle the verification status
 
-    axios.put('http://localhost/broker/addBroker.php', {
-      id,
-      verified: newStatus
-    })
-      .then(response => {
+    axios
+      .put('http://localhost/broker/addBroker.php', {
+        id,
+        verified: newStatus,
+      })
+      .then((response) => {
         if (response.data.status === 'success') {
           // Update the local state to reflect the changes
-          setProfileData(prevData =>
-            prevData.map(profile =>
+          setProfileData((prevData) =>
+            prevData.map((profile) =>
               profile.id === id ? { ...profile, verified: newStatus } : profile
             )
           );
         } else {
-          console.error("Error:", response.data.message);
+          console.error('Error:', response.data.message);
         }
       })
-      .catch(error => {
-        console.error("Error updating verification status:", error);
+      .catch((error) => {
+        console.error('Error updating verification status:', error);
       });
+  };
+
+  const getVerifiedCount = () => {
+    return profileData ? profileData.filter((profile) => profile.verified).length : 0;
   };
 
   if (loading) return <div className="profile-loading">Loading...</div>;
@@ -48,6 +54,14 @@ function Profile() {
   return (
     <div className="profile-container">
       <h1 className="profile-heading">Profile List</h1>
+
+      <div className="verified-count-container">
+  <button className="button-33">
+    Verified Profiles: {getVerifiedCount()}
+  </button>
+</div>
+
+
       {profileData && profileData.length > 0 ? (
         <table className="profile-table">
           <thead>
@@ -65,7 +79,7 @@ function Profile() {
             </tr>
           </thead>
           <tbody>
-            {profileData.map(profile => (
+            {profileData.map((profile) => (
               <tr key={profile.id} className="profile-table-row">
                 <td className="profile-table-cell">{profile.name}</td>
                 <td className="profile-table-cell">{profile.email}</td>
@@ -76,7 +90,9 @@ function Profile() {
                 <td className="profile-table-cell">{profile.address}</td>
                 <td className="profile-table-cell">
                   <button
-                    className={`verify-button ${profile.verified ? 'verified' : 'unverified'}`}
+                    className={`verify-button ${
+                      profile.verified ? 'verified' : 'unverified'
+                    }`}
                     onClick={() => handleVerify(profile.id, profile.verified)}
                   >
                     {profile.verified ? 'Unverify' : 'Verify'}
