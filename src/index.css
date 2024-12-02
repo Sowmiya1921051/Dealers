@@ -932,6 +932,7 @@ table tr:hover {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  margin-top: 10px;
 }
 
 .button-33:hover {
@@ -941,4 +942,6 @@ table tr:hover {
     rgba(44, 187, 99, 0.25) 0 16px 32px;
   transform: scale(1.05) rotate(-1deg);
 }
+
+
 
